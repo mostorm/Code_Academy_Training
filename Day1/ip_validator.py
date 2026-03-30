@@ -17,6 +17,8 @@ for ip in ipsplit:
     #If Statement to check if the number enetered for each part is between 0 and 255
     if number<0 or number>255:
         condition=False
+    if number==str(ip):
+        condition=False
 #print to the user that the ip is valid
 if (condition==True):
     print("Your IPv4 is valid")
