@@ -24,16 +24,16 @@ def is_valid_ipv4(ipv4):
             return False
             
     return True
-#Prompt the user to Enter A valid IPv4 Address
-ipv4=(input("enter an ipv4 Address: "))
-is_valid = is_valid_ipv4(ipv4)
+# #Prompt the user to Enter A valid IPv4 Address
+# ipv4=(input("enter an ipv4 Address: "))
+# is_valid = is_valid_ipv4(ipv4)
 
-#print to the user that the ip is valid
-if is_valid:
-    print("Your IPv4 is valid")
-#print to the user that the ip is not valid
-else:
-    print("The entered IP does not match the structure of IPv4") 
+# #print to the user that the ip is valid
+# if is_valid:
+#     print("Your IPv4 is valid")
+# #print to the user that the ip is not valid
+# else:
+#     print("The entered IP does not match the structure of IPv4") 
 
             
 
