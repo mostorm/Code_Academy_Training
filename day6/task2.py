@@ -11,101 +11,414 @@ API_KEY = os.getenv("GOOGLE_API_KEY")
 
 HTML_PAGE = """
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Route Duration Calculator</title>
+    <link rel="icon" href="https://www.google.com/favicon.ico" type="image/x-icon">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-        h1 { color: #333; }
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
+        * {
             box-sizing: border-box;
         }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #4285f4;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eaf4ff 0%, #f7fbff 50%, #eef7f2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: #1f2937;
         }
-        button:hover { background: #3367d6; }
+
+        .container {
+            width: 100%;
+            max-width: 760px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 22px;
+            padding: 32px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+            line-height: 1.2;
+            color: #111827;
+        }
+
+        .subtitle {
+            margin: 0;
+            color: #6b7280;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        form {
+            margin-top: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 14px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s ease;
+            background: #ffffff;
+        }
+
+        input:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.12);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 14px;
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #4285f4, #3367d6);
+            color: white;
+            box-shadow: 0 10px 20px rgba(66, 133, 244, 0.2);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 24px rgba(66, 133, 244, 0.28);
+        }
+
+        .secondary-btn {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .secondary-btn:hover {
+            background: #e5e7eb;
+        }
+
         #result {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f0f0f0;
-            border-radius: 4px;
+            margin-top: 28px;
             display: none;
         }
-        .error { color: red; }
+
+        .result-card {
+            border-radius: 18px;
+            padding: 22px;
+            background: #f8fbff;
+            border: 1px solid #dbeafe;
+        }
+
+        .result-title {
+            margin: 0 0 16px;
+            font-size: 20px;
+            color: #111827;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .result-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .result-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #6b7280;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .result-value {
+            font-size: 16px;
+            color: #111827;
+            word-break: break-word;
+        }
+
+        .error-box {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            color: #b42318;
+            border-radius: 16px;
+            padding: 16px;
+            font-weight: bold;
+        }
+
+        .success-box {
+            background: #ecfdf3;
+            border: 1px solid #abefc6;
+            color: #067647;
+            border-radius: 16px;
+            padding: 14px 16px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .spinner-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #374151;
+            font-weight: bold;
+        }
+
+        .spinner {
+            width: 22px;
+            height: 22px;
+            border: 3px solid #d1d5db;
+            border-top: 3px solid #4285f4;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            flex-shrink: 0;
+        }
+
+        .footer-note {
+            margin-top: 18px;
+            font-size: 13px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 700px) {
+            .card {
+                padding: 22px;
+                border-radius: 18px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Route Duration Calculator</h1>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="badge">Google Routes API</div>
+                <h1>Route Duration Calculator 🚗</h1>
+                <p class="subtitle">
+                    Enter your starting point and destination to get estimated driving time and route distance.
+                </p>
+            </div>
 
-    <form id="routeForm">
-        <label for="from_location">From:</label>
-        <input type="text" id="from_location" placeholder="e.g. Muscat, Oman" required>
+            <form id="routeForm" autocomplete="off">
+                <div class="grid">
+                    <div class="input-group">
+                        <label for="from_location">From</label>
+                        <input type="text" id="from_location" placeholder="e.g. Muscat, Oman" required>
+                    </div>
 
-        <label for="to_location">To:</label>
-        <input type="text" id="to_location" placeholder="e.g. Nizwa, Oman" required>
+                    <div class="input-group">
+                        <label for="to_location">To</label>
+                        <input type="text" id="to_location" placeholder="e.g. Nizwa, Oman" required>
+                    </div>
+                </div>
 
-        <button type="submit">Get Travel Time</button>
-    </form>
+                <div class="actions">
+                    <button type="submit" class="primary-btn">Get Travel Time</button>
+                    <button type="button" class="secondary-btn" id="swapBtn">Swap</button>
+                    <button type="button" class="secondary-btn" id="resetBtn">Reset</button>
+                </div>
+            </form>
 
-    <div id="result"></div>
+            <div id="result"></div>
+
+            <div class="footer-note">
+                Drive with purpose, arrive with patience.
+            </div>
+        </div>
+    </div>
 
     <script>
-        document.getElementById('routeForm').addEventListener('submit', async function(e) {
+        const form = document.getElementById('routeForm');
+        const resultDiv = document.getElementById('result');
+        const fromInput = document.getElementById('from_location');
+        const toInput = document.getElementById('to_location');
+        const resetBtn = document.getElementById('resetBtn');
+        const swapBtn = document.getElementById('swapBtn');
+
+        function showLoading() {
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <div class="result-card">
+                    <div class="spinner-wrap">
+                        <div class="spinner"></div>
+                        <span>Calculating route, please wait...</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <div class="error-box">
+                    ❌ ${message}
+                </div>
+            `;
+        }
+
+        function showResult(data) {
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <div class="result-card">
+                    <div class="success-box">✔ Route found successfully</div>
+                    <h2 class="result-title">Trip Summary</h2>
+
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-label">From</div>
+                            <div class="result-value">${data.from}</div>
+                        </div>
+
+                        <div class="result-item">
+                            <div class="result-label">To</div>
+                            <div class="result-value">${data.to}</div>
+                        </div>
+
+                        <div class="result-item">
+                            <div class="result-label">Distance</div>
+                            <div class="result-value">${data.distance_km} km</div>
+                        </div>
+
+                        <div class="result-item">
+                            <div class="result-label">Estimated Drive Time</div>
+                            <div class="result-value">${data.duration}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const resultDiv = document.getElementById('result');
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = 'Calculating...';
+            const from_location = fromInput.value.trim();
+            const to_location = toInput.value.trim();
 
-            const data = {
-                from_location: document.getElementById('from_location').value.trim(),
-                to_location: document.getElementById('to_location').value.trim()
-            };
+            if (!from_location || !to_location) {
+                showError('Both locations are required.');
+                return;
+            }
+
+            showLoading();
 
             try {
                 const response = await fetch('/get-route', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ from_location, to_location })
                 });
 
                 const result = await response.json();
 
                 if (!response.ok || result.error) {
-                    resultDiv.innerHTML = '<span class="error">Error: ' + (result.error || 'Unknown error') + '</span>';
+                    showError(result.error || 'Unknown error occurred.');
                     return;
                 }
 
-                resultDiv.innerHTML =
-                    '<strong>From:</strong> ' + result.from + '<br>' +
-                    '<strong>To:</strong> ' + result.to + '<br>' +
-                    '<strong>Distance:</strong> ' + (result.distance_meters / 1000).toFixed(2) + ' km<br>' +
-                    '<strong>Estimated Travel Time (Drive):</strong> ' + result.duration;
-            } catch (err) {
-                resultDiv.innerHTML = '<span class="error">Request failed: ' + err.message + '</span>';
+                showResult(result);
+
+            } catch (error) {
+                showError('Request failed: ' + error.message);
             }
+        });
+
+        resetBtn.addEventListener('click', function() {
+            fromInput.value = '';
+            toInput.value = '';
+            resultDiv.style.display = 'none';
+            resultDiv.innerHTML = '';
+            fromInput.focus();
+        });
+
+        swapBtn.addEventListener('click', function() {
+            const temp = fromInput.value;
+            fromInput.value = toInput.value;
+            toInput.value = temp;
         });
     </script>
 </body>
@@ -117,67 +430,40 @@ HTML_PAGE = """
 def index():
     return render_template_string(HTML_PAGE)
 
-def geocode(address):
-    if not API_KEY:
-        raise ValueError("GOOGLE_API_KEY is missing in environment variables")
-
-    resp = requests.get(
-        "https://maps.googleapis.com/maps/api/geocode/json",
-        params={"address": address, "key": API_KEY},
-        timeout=10
-    )
-    resp.raise_for_status()
-
-    data = resp.json()
-    print("Geocode response for", address, ":", data)
-
-    status = data.get("status")
-
-    if status != "OK":
-        error_message = data.get("error_message", "Unknown geocoding error")
-        raise ValueError(f"Geocoding failed for '{address}': {status} - {error_message}")
-
-    results = data.get("results", [])
-    if not results:
-        raise ValueError(f"No results found for '{address}'")
-
-    location = results[0]["geometry"]["location"]
-    return {
-        "lat": location["lat"],
-        "lng": location["lng"],
-        "name": results[0]["formatted_address"]
-    }
-
 
 def format_duration(duration_value):
     """
-    Convert Google duration like '123s' into readable text.
+    Convert duration returned by Google like '3661s' into '1h 1m 1s'
     """
     if not duration_value or not isinstance(duration_value, str) or not duration_value.endswith("s"):
         return duration_value
 
-    duration_seconds = int(duration_value[:-1])
+    try:
+        total_seconds = int(duration_value[:-1])
+    except ValueError:
+        return duration_value
 
-    minutes, seconds = divmod(duration_seconds, 60)
+    minutes, seconds = divmod(total_seconds, 60)
     hours, minutes = divmod(minutes, 60)
 
+    parts = []
     if hours > 0:
-        return f"{hours}h {minutes}m {seconds}s"
-    elif minutes > 0:
-        return f"{minutes}m {seconds}s"
-    else:
-        return f"{seconds}s"
+        parts.append(f"{hours}h")
+    if minutes > 0:
+        parts.append(f"{minutes}m")
+    if seconds > 0 or not parts:
+        parts.append(f"{seconds}s")
+
+    return " ".join(parts)
 
 
 @app.route("/get-route", methods=["POST"])
 def get_route():
     try:
         if not API_KEY:
-            return jsonify({"error": "GOOGLE_API_KEY is not set"}), 500
+            return jsonify({"error": "GOOGLE_API_KEY is not set in your .env file"}), 500
 
         data = request.get_json(silent=True)
-        print("Received data:", data)
-
         if not data:
             return jsonify({"error": "Invalid or missing JSON body"}), 400
 
@@ -187,30 +473,12 @@ def get_route():
         if not from_location or not to_location:
             return jsonify({"error": "Both from and to locations are required"}), 400
 
-        from_geo = geocode(from_location)
-        if not from_geo:
-            return jsonify({"error": f"Could not find location: {from_location}"}), 400
-
-        to_geo = geocode(to_location)
-        if not to_geo:
-            return jsonify({"error": f"Could not find location: {to_location}"}), 400
-
         payload = {
             "origin": {
-                "location": {
-                    "latLng": {
-                        "latitude": from_geo["lat"],
-                        "longitude": from_geo["lng"]
-                    }
-                }
+                "address": from_location
             },
             "destination": {
-                "location": {
-                    "latLng": {
-                        "latitude": to_geo["lat"],
-                        "longitude": to_geo["lng"]
-                    }
-                }
+                "address": to_location
             },
             "travelMode": "DRIVE",
             "routingPreference": "TRAFFIC_AWARE",
@@ -227,48 +495,45 @@ def get_route():
         headers = {
             "Content-Type": "application/json",
             "X-Goog-Api-Key": API_KEY,
-            "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline"
+            "X-Goog-FieldMask": "routes.duration,routes.distanceMeters"
         }
 
-        resp = requests.post(
+        response = requests.post(
             "https://routes.googleapis.com/directions/v2:computeRoutes",
             json=payload,
             headers=headers,
-            timeout=10
+            timeout=15
         )
-        resp.raise_for_status()
 
-        result = resp.json()
-        print("Google Routes response:", result)
+        if response.status_code != 200:
+            try:
+                api_error = response.json()
+            except Exception:
+                api_error = {"error": response.text}
+            return jsonify({
+                "error": f"Google Routes API error: {api_error}"
+            }), 502
 
+        result = response.json()
         routes = result.get("routes", [])
+
         if not routes:
-            return jsonify({"error": "No routes returned by Google Routes API"}), 502
+            return jsonify({"error": "No routes were returned by Google Routes API"}), 502
 
         route = routes[0]
-        duration_str = format_duration(route.get("duration"))
+        distance_meters = route.get("distanceMeters", 0)
+        duration_raw = route.get("duration", "")
 
         return jsonify({
-            "from": from_geo["name"],
-            "to": to_geo["name"],
-            "distance_meters": route.get("distanceMeters"),
-            "duration": duration_str
+            "from": from_location,
+            "to": to_location,
+            "distance_meters": distance_meters,
+            "distance_km": f"{distance_meters / 1000:.2f}",
+            "duration": format_duration(duration_raw)
         })
 
-    except requests.exceptions.HTTPError as e:
-        error_text = ""
-        if e.response is not None:
-            try:
-                error_text = e.response.text
-            except Exception:
-                error_text = str(e)
-        return jsonify({"error": f"Google API HTTP error: {error_text or str(e)}"}), 502
-
     except requests.exceptions.RequestException as e:
-        return jsonify({"error": f"Request failed: {str(e)}"}), 502
-
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"Network/request error: {str(e)}"}), 502
 
     except Exception as e:
         return jsonify({"error": f"Unexpected server error: {str(e)}"}), 500
