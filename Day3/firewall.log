@@ -1,0 +1,19 @@
+Sep 08 10:15:21 firewall1 kernel: ACCEPT TCP 192.168.1.10:54321 -> 10.0.0.5:80 size=512
+Sep 08 10:15:25 firewall1 kernel: DROP UDP 203.0.113.5:4444 -> 10.0.0.5:53 size=128
+Sep 08 10:15:30 firewall1 kernel: ACCEPT TCP 192.168.1.11:52345 -> 10.0.0.8:443 size=1024
+Sep 08 10:15:35 firewall1 kernel: DROP ICMP 198.51.100.7:0 -> 10.0.0.9:0 size=64
+Sep 08 10:15:40 firewall1 kernel: DROP TCP 203.0.113.5:5555 -> 10.0.0.5:22 size=256
+Sep 08 10:15:45 firewall1 kernel: ACCEPT UDP 192.168.1.12:60000 -> 10.0.0.10:161 size=300
+Sep 08 10:15:50 firewall1 kernel: DROP TCP 203.0.113.5:6666 -> 10.0.0.5:22 size=256
+Sep 08 10:15:55 firewall1 kernel: ACCEPT TCP 192.168.1.13:40000 -> 10.0.0.11:25 size=700
+Sep 08 10:16:00 firewall1 kernel: DROP UDP 198.51.100.8:7777 -> 10.0.0.12:69 size=150
+Sep 08 10:16:05 firewall1 kernel: ACCEPT TCP 192.168.1.14:34567 -> 10.0.0.5:80 size=850
+Sep 08 10:16:10 firewall1 kernel: DROP TCP 198.51.100.7:8888 -> 10.0.0.5:22 size=512
+Sep 08 10:16:15 firewall1 kernel: ACCEPT UDP 192.168.1.15:45678 -> 10.0.0.13:53 size=200
+Sep 08 10:16:20 firewall1 kernel: DROP TCP 198.51.100.7:9999 -> 10.0.0.5:22 size=512
+Malformed log line without proper format
+Sep 08 10:16:30 firewall1 kernel: ACCEPT TCP 192.168.1.16:50000 -> 10.0.0.5:443 size=950
+Sep 08 10:16:35 firewall1 kernel: DROP UDP 203.0.113.9:3333 -> 10.0.0.14:123 size=120
+Sep 08 10:16:40 firewall1 kernel: ACCEPT ICMP 192.168.1.17:0 -> 10.0.0.15:0 size=84
+Sep 08 10:16:45 firewall1 kernel: DROP TCP 203.0.113.5:1111 -> 10.0.0.5:22 size=300
+BadEntry ACCEPT TCP no_ip -> size=100

@@ -1,0 +1,172 @@
+[
+    {
+        "timestamp": "Sep 08 10:15:21",
+        "action": "ACCEPT",
+        "protocol": "TCP",
+        "src_ip": "192.168.1.10",
+        "src_port": 54321,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 80,
+        "size": 512
+    },
+    {
+        "timestamp": "Sep 08 10:15:25",
+        "action": "DROP",
+        "protocol": "UDP",
+        "src_ip": "203.0.113.5",
+        "src_port": 4444,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 53,
+        "size": 128
+    },
+    {
+        "timestamp": "Sep 08 10:15:30",
+        "action": "ACCEPT",
+        "protocol": "TCP",
+        "src_ip": "192.168.1.11",
+        "src_port": 52345,
+        "dst_ip": "10.0.0.8",
+        "dst_port": 443,
+        "size": 1024
+    },
+    {
+        "timestamp": "Sep 08 10:15:35",
+        "action": "DROP",
+        "protocol": "ICMP",
+        "src_ip": "198.51.100.7",
+        "src_port": 0,
+        "dst_ip": "10.0.0.9",
+        "dst_port": 0,
+        "size": 64
+    },
+    {
+        "timestamp": "Sep 08 10:15:40",
+        "action": "DROP",
+        "protocol": "TCP",
+        "src_ip": "203.0.113.5",
+        "src_port": 5555,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 22,
+        "size": 256
+    },
+    {
+        "timestamp": "Sep 08 10:15:45",
+        "action": "ACCEPT",
+        "protocol": "UDP",
+        "src_ip": "192.168.1.12",
+        "src_port": 60000,
+        "dst_ip": "10.0.0.10",
+        "dst_port": 161,
+        "size": 300
+    },
+    {
+        "timestamp": "Sep 08 10:15:50",
+        "action": "DROP",
+        "protocol": "TCP",
+        "src_ip": "203.0.113.5",
+        "src_port": 6666,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 22,
+        "size": 256
+    },
+    {
+        "timestamp": "Sep 08 10:15:55",
+        "action": "ACCEPT",
+        "protocol": "TCP",
+        "src_ip": "192.168.1.13",
+        "src_port": 40000,
+        "dst_ip": "10.0.0.11",
+        "dst_port": 25,
+        "size": 700
+    },
+    {
+        "timestamp": "Sep 08 10:16:00",
+        "action": "DROP",
+        "protocol": "UDP",
+        "src_ip": "198.51.100.8",
+        "src_port": 7777,
+        "dst_ip": "10.0.0.12",
+        "dst_port": 69,
+        "size": 150
+    },
+    {
+        "timestamp": "Sep 08 10:16:05",
+        "action": "ACCEPT",
+        "protocol": "TCP",
+        "src_ip": "192.168.1.14",
+        "src_port": 34567,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 80,
+        "size": 850
+    },
+    {
+        "timestamp": "Sep 08 10:16:10",
+        "action": "DROP",
+        "protocol": "TCP",
+        "src_ip": "198.51.100.7",
+        "src_port": 8888,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 22,
+        "size": 512
+    },
+    {
+        "timestamp": "Sep 08 10:16:15",
+        "action": "ACCEPT",
+        "protocol": "UDP",
+        "src_ip": "192.168.1.15",
+        "src_port": 45678,
+        "dst_ip": "10.0.0.13",
+        "dst_port": 53,
+        "size": 200
+    },
+    {
+        "timestamp": "Sep 08 10:16:20",
+        "action": "DROP",
+        "protocol": "TCP",
+        "src_ip": "198.51.100.7",
+        "src_port": 9999,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 22,
+        "size": 512
+    },
+    {
+        "timestamp": "Sep 08 10:16:30",
+        "action": "ACCEPT",
+        "protocol": "TCP",
+        "src_ip": "192.168.1.16",
+        "src_port": 50000,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 443,
+        "size": 950
+    },
+    {
+        "timestamp": "Sep 08 10:16:35",
+        "action": "DROP",
+        "protocol": "UDP",
+        "src_ip": "203.0.113.9",
+        "src_port": 3333,
+        "dst_ip": "10.0.0.14",
+        "dst_port": 123,
+        "size": 120
+    },
+    {
+        "timestamp": "Sep 08 10:16:40",
+        "action": "ACCEPT",
+        "protocol": "ICMP",
+        "src_ip": "192.168.1.17",
+        "src_port": 0,
+        "dst_ip": "10.0.0.15",
+        "dst_port": 0,
+        "size": 84
+    },
+    {
+        "timestamp": "Sep 08 10:16:45",
+        "action": "DROP",
+        "protocol": "TCP",
+        "src_ip": "203.0.113.5",
+        "src_port": 1111,
+        "dst_ip": "10.0.0.5",
+        "dst_port": 22,
+        "size": 300
+    }
+]
