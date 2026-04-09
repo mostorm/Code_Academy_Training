@@ -1,0 +1,17 @@
+--- Network Device Audit Report ---
+
+Device: router1
+- Telnet Status: Telnet is enabled
+- HTTP Server Status: HTTP server is disabled
+- SNMP Status: Default SNMP community strings found
+
+Device: router2
+- Telnet Status: Telnet is disabled
+- HTTP Server Status: HTTP server is enabled
+- SNMP Status: Default SNMP community strings found
+
+Device: router3
+- Telnet Status: Telnet is disabled
+- HTTP Server Status: HTTP server is enabled
+- SNMP Status: Default SNMP community strings found
+
